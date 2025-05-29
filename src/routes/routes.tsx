@@ -2,6 +2,7 @@ import { getUsers } from '@services/Index';
 import { retryDynamicImport } from '@utils/retryDynamicImport';
 import { createBrowserRouter } from 'react-router';
 const Main = retryDynamicImport(() => import('@pages/Main'));
+const Test = retryDynamicImport(() => import('@pages/Test'));
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -12,4 +13,5 @@ export const router = createBrowserRouter([
       };
     },
   },
+  { path: '/test', element: <Test /> },
 ]);

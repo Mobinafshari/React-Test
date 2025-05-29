@@ -1,21 +1,16 @@
-import { useLoaderData } from 'react-router';
-import {
-  Sheet,
-  Button,
-  SettingsSheet,
-  Checkbox,
-  Switch,
-} from '@mojtaba118/raui';
-import { useTheme } from '@mojtaba118/raui/Theme';
+import { useLoaderData, useNavigate } from 'react-router';
+import { Checkbox, Switch, Button } from 'custom-raui';
+import { useTheme } from 'custom-raui/Theme';
 import { useState } from 'react';
-// import { Button } from '@mui/material';
+// import { Button, Checkbox, Switch } from '@mui/material';
 function Main() {
+  const navigate = useNavigate();
   const { users } = useLoaderData();
   const { changeTheme, theme } = useTheme();
   const [open, setOpen] = useState(false);
   return (
     <div>
-      <Button onClick={() => setOpen(true)}>Open</Button>
+      <Button onClick={() => navigate('/test')}>Open</Button>
       <h1>Main</h1>
       <ul>
         {users.map((user) => (
@@ -26,7 +21,7 @@ function Main() {
           </>
         ))}
       </ul>
-      <Sheet open={open} onClose={() => setOpen(false)}>
+      {/* <Sheet open={open} onClose={() => setOpen(false)}>
         Hello
       </Sheet>
       <SettingsSheet
@@ -34,7 +29,7 @@ function Main() {
         onClose={() => setOpen(false)}
         open={open}
         theme={theme}
-      />
+      /> */}
     </div>
   );
 }
