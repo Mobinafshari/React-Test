@@ -30,7 +30,7 @@
     "@types/react-dom": "^19.0.2",
     "axios": "^1.7.9",
     "colord": "^2.9.3",
-    "custom-raui": "^0.0.53",
+    "custom-raui": "^0.0.57",
     "i18next": "^24.2.1",
     "motion": "^12.15.0",
     "npm": "^11.1.0",

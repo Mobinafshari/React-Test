@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from 'react-router';
-import { Checkbox, Switch, Button } from 'custom-raui';
-import { useTheme } from 'custom-raui/Theme';
+import {Button} from 'custom-raui/button';
+import { useTheme } from 'custom-raui/theme';
 import { useState } from 'react';
 // import { Button, Checkbox, Switch } from '@mui/material';
 function Main() {
@@ -16,8 +16,8 @@ function Main() {
         {users.map((user) => (
           <>
             <li key={user.id}>{user.name}</li>
-            <Checkbox />
-            <Switch />
+            {/* <Checkbox />
+            <Switch /> */}
           </>
         ))}
       </ul>

@@ -1,4 +1,4 @@
-import { Button } from '@mojtaba118/raui';
+import { Button } from 'custom-raui/button';
 function Test() {
   return (
     <div>
