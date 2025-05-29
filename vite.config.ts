@@ -11,17 +11,21 @@ export default defineConfig({
       output: {
         manualChunks(id: string) {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) {
-              return 'react-vendor';
-            }
             if (id.includes('lodash')) {
               return 'lodash-vendor';
             }
             if (id.includes('axios')) {
               return 'axios-vendor';
-            }if (id.includes('mui')) {
-              return 'mui-vendor';
             }
+            if (id.includes('react')) {
+              return 'react-vendor';
+            }
+            // if (id.includes('mojtaba')) {
+            //   return 'mojtaba-vendor';
+            // }
+            // if (id.includes('mui')) {
+            //   return 'mui-vendor';
+            // }
           }
           // lazy load your pages that you wanna be in a separate chunk
         },

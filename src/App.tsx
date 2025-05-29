@@ -1,7 +1,7 @@
 // const usersPromise = fetch('https://jsonplaceholder.typicode.com/users').then(
 //   (res) => res.json()
 // );
-// import '@config/i18n';
+import '@config/i18n';
 // import { useState } from 'react';
 
 // function App() {
