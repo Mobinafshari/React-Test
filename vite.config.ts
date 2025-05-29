@@ -19,6 +19,8 @@ export default defineConfig({
             }
             if (id.includes('axios')) {
               return 'axios-vendor';
+            }if (id.includes('mui')) {
+              return 'mui-vendor';
             }
           }
           // lazy load your pages that you wanna be in a separate chunk
