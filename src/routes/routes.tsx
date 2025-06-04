@@ -1,3 +1,4 @@
+import { TestProvider } from '@context/TestContext';
 import { getUsers } from '@services/Index';
 import { retryDynamicImport } from '@utils/retryDynamicImport';
 import { createBrowserRouter } from 'react-router';
@@ -6,7 +7,11 @@ const Test = retryDynamicImport(() => import('@pages/Test'));
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Main />,
+    element: (
+      <TestProvider>
+        <Main />
+      </TestProvider>
+    ),
     loader: async () => {
       return {
         users: await getUsers(),

@@ -17,6 +17,9 @@ export default defineConfig({
             if (id.includes('axios')) {
               return 'axios-vendor';
             }
+            if (id.includes('react-constore')) {
+              return 'react-constore-vendor';
+            }
             if (id.includes('react')) {
               return 'react-vendor';
             }

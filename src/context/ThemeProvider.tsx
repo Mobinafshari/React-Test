@@ -2,77 +2,47 @@ import createCache from '@emotion/cache';
 import { prefixer } from 'stylis';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
-import {
-  createTheme,
-  CssBaseline,
-  ThemeProvider as MuiThemeProvider,
-} from '@mui/material';
+import { CssBaseline } from '@mui/material';
 import { ReactNode, useEffect, useMemo } from 'react';
-import theme from '@utils/theme';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from '@mojtaba118/raui/Theme';
+import i18n from '@config/i18n';
+import RauiThemeProvider, { CustomThemeProps } from 'custom-raui/theme';
+
+const cacheRtl = createCache({
+  key: i18n.dir(i18n.resolvedLanguage) === 'rtl' ? 'muirtl' : 'muiltr',
+  stylisPlugins:
+    i18n.dir(i18n.resolvedLanguage) === 'rtl' ? [prefixer, rtlPlugin] : [],
+});
 
 export default function ThemeProvider({ children }: { children: ReactNode }) {
   const { i18n } = useTranslation();
-  const { theme: rauiTheme } = useTheme();
-  const dir = i18n.dir(i18n.resolvedLanguage);
+
   useEffect(() => {
-    // document.body.style.direction = dir;
-    document.documentElement.setAttribute('data-dir', dir);
-  }, []);
+    document.documentElement.setAttribute(
+      'data-dir',
+      i18n.dir(i18n.resolvedLanguage)
+    );
+  }, [i18n.resolvedLanguage]);
 
-  const cacheRtl = useMemo(
-    () =>
-      createCache({
-        key: dir === 'rtl' ? 'muirtl' : 'muiltr',
-        stylisPlugins: dir === 'rtl' ? [prefixer, rtlPlugin] : [],
-      }),
-    [i18n.language]
-  );
-
-  const dynamicTheme = useMemo(
-    () =>
-      createTheme({
-        ...theme,
-        colors: {
-          secondary: {
-            a4: '#fff',
-            a8: '#fff',
-            a12: '#fff',
-            a16: '#fff',
-            a24: '#fff',
-            a32: '#fff',
-            a56: '#fff',
-            light: '#fff',
-            main: '#fff',
-            dark: '#fff',
-            ...rauiTheme.colors,
-          },
-        },
-        direction: dir,
-        breakpoints: {
-          values: {
-            xs: 0,
-            sm: 768,
-            md: 1024,
-            lg: 1200,
-            xl: 1536,
-          },
-        },
-        typography: {
-          fontFamily:
-            dir === 'rtl'
-              ? ['Vazirmatn', 'Inter', 'sans-serif'].join(', ')
-              : ['Inter', 'Vazirmatn', 'sans-serif'].join(', '),
-        },
-      }),
-    [i18n.language]
-  );
+  const dynamicTheme: Partial<CustomThemeProps> = useMemo(
+    () => ({
+      direction: i18n.dir(i18n.resolvedLanguage),
+      typography: {
+        fontFamily:
+          i18n.dir(i18n.resolvedLanguage) === 'rtl'
+            ? ['Vazirmatn', 'Inter', 'sans-serif'].join(', ')
+            : ['Inter', 'Vazirmatn', 'sans-serif'].join(', '),
+      },
+    }),
+    []
+  ) as Partial<CustomThemeProps>;
 
   return (
-    <MuiThemeProvider theme={dynamicTheme}>
-      <CssBaseline />
-      <CacheProvider value={cacheRtl}>{children}</CacheProvider>
-    </MuiThemeProvider>
+    <CacheProvider value={cacheRtl}>
+      <RauiThemeProvider theme={dynamicTheme}>
+        <CssBaseline />
+        {children}
+      </RauiThemeProvider>
+    </CacheProvider>
   );
 }
