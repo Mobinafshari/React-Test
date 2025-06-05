@@ -3,6 +3,7 @@ import { getUsers } from '@services/Index';
 import { retryDynamicImport } from '@utils/retryDynamicImport';
 import { createBrowserRouter } from 'react-router';
 const Main = retryDynamicImport(() => import('@pages/Main'));
+const SecondMain = retryDynamicImport(() => import('@pages/SecondMain'));
 const Test = retryDynamicImport(() => import('@pages/Test'));
 export const router = createBrowserRouter([
   {
@@ -10,6 +11,7 @@ export const router = createBrowserRouter([
     element: (
       <TestProvider>
         <Main />
+        <SecondMain />
       </TestProvider>
     ),
     loader: async () => {
