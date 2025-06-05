@@ -10,19 +10,28 @@ function Main() {
   const { changeTheme, theme } = useTheme();
   const [open, setOpen] = useState(false);
   const { num, setNumber } = useTestContext();
-  const [count, setCount] = store.useStoreKey('count');
-
+  // const { user } = store.getState();
+  const [user, setUser] = store.useStoreKey('user');
+  // const setUser = () => {
+  //   store.setState({ user: { age: 25, name: 'mobin' } });
+  // };
   return (
     <>
       <div>
+        {user.name}
         <div>
-          <h2>Count: {count}</h2>
+          <Button
+            onClick={() => setUser((prev) => ({ ...prev, name: 'mobin' }))}
+          >
+            set name to mobin
+          </Button>
+          {/* <h2>Count: {count}</h2>
           <Button onClick={() => setCount(count + 1)}>
             Increment for library
           </Button>
           <Button onClick={() => setCount((c) => c + 1)}>
             Functional Update
-          </Button>
+          </Button> */}
         </div>
         <div>
           <Button onClick={() => setNumber(num + 1)}>Increase Context</Button>

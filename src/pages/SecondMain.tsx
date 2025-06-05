@@ -3,12 +3,12 @@ import store from '@store/index';
 
 function SecondMain() {
   const { theme } = useTestContext();
-  const libraryTheme = store.getState('theme');
+  const { main } = store.getState('theme');
   // const [count, setCount] = store.useStoreKey('count');
   return (
     <div style={{ marginTop: '50px' }}>
       <div>
-        theme in library {libraryTheme}
+        theme in library {main}
         {/* <h2>Count: {count}</h2>
         <Button onClick={() => setCount(count + 1)}>
           Increment for library

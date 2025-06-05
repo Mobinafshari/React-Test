@@ -4,7 +4,7 @@ const store = createStore({
   count: 0,
   user: { name: 'Guest', age: 25 },
   todos: [],
-  theme: 'Salam',
+  theme: { main: 'Salam' },
 });
 
 export default store;
